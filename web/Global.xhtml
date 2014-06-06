@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,20 +14,55 @@
     </h:head>
 
     <h:body>
-        <h:form>
+        <h:form>      
             <div id="top">
-                <h1> Meu site </h1>
+                <h1> Syscon Enterprise - Sistema de Gerenciamento de Logística </h1>
             </div>
+            <p:growl id="messages"/>
+            <p:menubar>                
+                <p:submenu label="Clientes">                    
+                    <p:menuitem value="Novo Cliente" url="#" />
+                    <p:menuitem value="Buscar Cliente" url="#" />                                        
+                </p:submenu>
+                <p:submenu label="Funcionarios">                    
+                    <p:menuitem value="Novo Funcionario" url="#" />
+                    <p:menuitem value="Buscar Funcioanrio" url="#" />                                           
+                </p:submenu>
+                <p:submenu label="Veículos">                    
+                    <p:menuitem value="Novo Veículo" url="#" />
+                    <p:menuitem value="Buscar Veículos" url="#" />
+                </p:submenu>
+
+                <p:submenu label="Viagens">                    
+                    <p:menuitem value="Nova Viagem" url="#" />
+                    <p:menuitem value="Buscar Viagens" url="#" /> 
+                </p:submenu>
+
+                <p:submenu label="Encomendas">                    
+                    <p:menuitem value="Nova Encomenda" url="#" />
+                    <p:menuitem value="Buscar Encomendas" url="#" />                     
+                </p:submenu>
+
+                <p:submenu label="Rotas">                    
+                    <p:menuitem value="Nova Rota" url="#" />
+                    <p:menuitem value="Buscar Rotas" url="#" />                     
+                </p:submenu>
+
+                
+
+                <f:facet name="options">                    
+                    <p:commandButton type="button" value="Sair do Sistema" icon="ui-icon-extlink" />
+                </f:facet>
+            </p:menubar>
 
             <div id="content" class="center_content">
                 <ui:insert name="content">Content</ui:insert>
             </div>
-
-        </h:form>
+        </h:form> 
         <div id="bottom">
-            Copyright 2014 ASAF
-        </div>
-
+            <h1>Copyright 2014 ACL Software</h1>
+        </div>     
+        
     </h:body>
 
 </html>
