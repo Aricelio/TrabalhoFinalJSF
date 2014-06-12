@@ -1,19 +1,20 @@
 
 
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.model.dao;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 public abstract class DAOGenerico<T> {
-    @PersistenceContext(name="MeuPrimeiroJSFPU")
+    @PersistenceContext(name="TrabalhoFinalJSFPU")
     protected EntityManager manager;
     private Class tipo;
     public DAOGenerico (Class t) {
         tipo = t;
     }
     
-    //Método Save.............................................................
+    //Method Save...............................................................
     public boolean Salvar(T obj) {
         try{
             //salva o objeto
@@ -36,9 +37,7 @@ public abstract class DAOGenerico<T> {
     }
     
     //Method Find...............................................................
-    public abstract List<T> Buscar(T obj);
-    
-    
+    public abstract List<T> Buscar(T obj);    
     
     //Method Delete.............................................................   
     public boolean Apagar(T obj) {
@@ -49,5 +48,4 @@ public abstract class DAOGenerico<T> {
             return false;
         }
     }
-    
 }
