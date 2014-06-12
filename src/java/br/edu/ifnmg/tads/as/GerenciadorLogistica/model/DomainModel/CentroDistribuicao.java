@@ -1,16 +1,13 @@
-
-
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.model.DomainModel;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,21 +15,22 @@ import javax.persistence.Table;
  * @author celio
  */
 @Entity
+@Table(name = "CentrosDistribuicao")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "Funcionarios")
-public class Funcionario extends Pessoa implements Serializable {
+public class CentroDistribuicao extends Pessoa implements Serializable {
     
     //Attributes................................................................
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name ="CentroDistribuicaoID")
     private Long id;
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Cargo cargo;
-
+    @Column(length = 20)
+    private String cnpj;
     
-    //Getters and Setters.......................................................
+
+    //Getters e Setters.........................................................
     public Long getId() {
         return id;
     }
@@ -40,17 +38,16 @@ public class Funcionario extends Pessoa implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-      
 
-    public Cargo getCargo() {
-        return cargo;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
     }
-    
-    //Equals and HashCode.......................................................
+
+    //Equals e HashCode.........................................................
     @Override
     public int hashCode() {
         int hash = 0;
@@ -61,13 +58,13 @@ public class Funcionario extends Pessoa implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Funcionario)) {
+        if (!(object instanceof CentroDistribuicao)) {
             return false;
         }
-        Funcionario other = (Funcionario) object;
+        CentroDistribuicao other = (CentroDistribuicao) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
-    }
+    }    
 }

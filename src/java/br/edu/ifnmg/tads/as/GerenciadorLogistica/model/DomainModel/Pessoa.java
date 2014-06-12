@@ -24,6 +24,8 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Pessoas")
 public class Pessoa implements Serializable {
+    
+    //Attributes................................................................
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,8 +44,10 @@ public class Pessoa implements Serializable {
     @Column(length = 20) 
     private String rg; 
 
+    @Column(length = 1)
+    private String sexo;
     
-    //Getters e Setter..........................................................
+    //Getters and Setter..........................................................
     public Long getId() {
         return id;
     }
@@ -84,15 +88,16 @@ public class Pessoa implements Serializable {
         this.rg = rg;
     }
     
-    //Equals e HashCode.........................................................
+    //Equals and HashCode.......................................................
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.nome);
-        hash = 89 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 89 * hash + Objects.hashCode(this.cpf);
-        hash = 89 * hash + Objects.hashCode(this.rg);
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.nome);
+        hash = 83 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 83 * hash + Objects.hashCode(this.cpf);
+        hash = 83 * hash + Objects.hashCode(this.rg);
+        hash = 83 * hash + Objects.hashCode(this.sexo);
         return hash;
     }
 
@@ -120,14 +125,16 @@ public class Pessoa implements Serializable {
         if (!Objects.equals(this.rg, other.rg)) {
             return false;
         }
+        if (!Objects.equals(this.sexo, other.sexo)) {
+            return false;
+        }
         return true;
     }
-    
-    
 
+    //toString..................................................................
     @Override
     public String toString() {
-        return "br.edu.ifnmg.tads.as.GerenciadorLogistica.model.DomainModel.Pessoa[ id=" + id + " ]";
+        return nome;
     }
     
 }

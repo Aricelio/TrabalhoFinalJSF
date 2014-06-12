@@ -1,16 +1,14 @@
-
-
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.model.DomainModel;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,19 +16,19 @@ import javax.persistence.Table;
  * @author celio
  */
 @Entity
+@Table(name = "TiposEncomenda")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "Funcionarios")
-public class Funcionario extends Pessoa implements Serializable {
+public class TipoEncomenda implements Serializable {
     
     //Attributes................................................................
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "TipoEncomendaID")
     private Long id;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Cargo cargo;
 
+    @Column(length = 50)
+    private String nome;
     
     //Getters and Setters.......................................................
     public Long getId() {
@@ -40,34 +38,46 @@ public class Funcionario extends Pessoa implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-      
 
-    public Cargo getCargo() {
-        return cargo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     
-    //Equals and HashCode.......................................................
+    //Equals and hashCode.......................................................
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Funcionario)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Funcionario other = (Funcionario) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoEncomenda other = (TipoEncomenda) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
         return true;
     }
+
+    //toString..................................................................
+    @Override
+    public String toString() {
+        return nome;
+    }
+    
 }
