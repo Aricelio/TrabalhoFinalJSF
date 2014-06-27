@@ -3,7 +3,9 @@
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +28,14 @@ import javax.persistence.TemporalType;
 @Table(name = "Pessoas")
 public class Pessoa implements Serializable {
     
+    //Constructor...............................................................
+     public Pessoa() {
+        this.endereco = new ArrayList<Endereco>();
+        this.telefone = new ArrayList<Telefone>();
+        this.email = new ArrayList<Email>();
+    }
+
+
     //Attributes................................................................
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,6 +58,16 @@ public class Pessoa implements Serializable {
     @Column(length = 1)
     private String sexo;
     
+    @OneToMany
+    private List<Endereco> endereco;
+    
+    @OneToMany
+    private List<Telefone> telefone;
+    
+    @OneToMany
+    private List<Email> email;
+    
+      
     //Getters and Setter..........................................................
     public Long getId() {
         return id;
@@ -86,6 +107,65 @@ public class Pessoa implements Serializable {
 
     public void setRg(String rg) {
         this.rg = rg;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
+    
+    //Method addTelefone........................................................    
+    public void addTelefone(Telefone t){
+        if(telefone == null)
+            telefone = new ArrayList<Telefone>();
+        if(!telefone.contains(t)){
+            telefone.add(t);
+        }
+        
+    }
+    
+    public void removeTelefone(Telefone t){
+        if(telefone.contains(t)){
+            telefone.remove(t);
+        }
+    }
+    
+    
+    //Method addEmail...........................................................
+    public void addEmail(Email e){
+        if(email == null)
+            email = new ArrayList<Email>();
+        if(!email.contains(e)){
+            email.add(e);
+        }
+        
+    }
+    
+    public void removeEmail(Email e){
+        if(email.contains(e)){
+            email.remove(e);
+        }
+    }
+    
+    //Method addEndereco........................................................
+    public void addEndereco(Endereco e){
+        if(endereco == null){
+            endereco = new ArrayList<Endereco>();
+        }
+        if(!endereco.contains(e)){
+            endereco.add(e);
+        }
+    }
+    
+    public void removeEndereco(Endereco e){
+        if(endereco.contains(e)){
+            endereco.remove(e);
+        }
     }
     
     //Equals and HashCode.......................................................

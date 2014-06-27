@@ -10,7 +10,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Facelets Template</title>
+        <title>Pagina Principal</title>
     </h:head>
 
     <h:body>
@@ -25,7 +25,7 @@
                     <p:menuitem value="Buscar Cliente" url="#" />                                        
                 </p:submenu>
                 <p:submenu label="Funcionarios">                    
-                    <p:menuitem value="Novo Funcionario" url="#" />
+                    <p:menuitem value="Novo Funcionario" url="editarFuncionario.xhtml" />
                     <p:menuitem value="Buscar Funcioanrio" url="#" />                                           
                 </p:submenu>
                 <p:submenu label="Veículos">                    
@@ -48,9 +48,7 @@
                     <p:menuitem value="Buscar Rotas" url="#" />                     
                 </p:submenu>
 
-                
-
-                <f:facet name="options">                    
+                <f:facet name="sair">                    
                     <p:commandButton type="button" value="Sair do Sistema" icon="ui-icon-extlink" />
                 </f:facet>
             </p:menubar>
