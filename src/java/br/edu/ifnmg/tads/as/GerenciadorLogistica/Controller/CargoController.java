@@ -89,7 +89,7 @@ public class CargoController implements Serializable {
 
     public List<Cargo> getListagem() {
         if (listagem == null) {
-            listagem = cargoDAO.Buscar(null);
+            listagem = cargoDAO.Buscar(entidade);
         }
         return listagem;
     }

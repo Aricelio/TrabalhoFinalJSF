@@ -2,12 +2,15 @@ package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess;
 
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Cargo;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author celio
  */
+
+@Stateless
 public class CargoDAO extends DAOGenerico<Cargo> {
 
     //Constructor...............................................................

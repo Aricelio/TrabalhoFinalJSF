@@ -1,5 +1,3 @@
-
-
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel;
 
 import java.io.Serializable;
@@ -7,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,14 +26,13 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Pessoas")
 public class Pessoa implements Serializable {
-    
-    //Constructor...............................................................
-     public Pessoa() {
-        this.endereco = new ArrayList<Endereco>();
-        this.telefone = new ArrayList<Telefone>();
-        this.email = new ArrayList<Email>();
-    }
 
+    //Constructor...............................................................
+    public Pessoa() {
+        this.enderecos = new ArrayList<Endereco>();
+        this.telefones = new ArrayList<Telefone>();
+        this.emails = new ArrayList<Email>();
+    }
 
     //Attributes................................................................
     private static final long serialVersionUID = 1L;
@@ -42,32 +40,31 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "PessoaID")
     private Long id;
-    
+
     @Column(length = 50)
     private String nome;
-   
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataNascimento;
-    
-    @Column(length = 14) 
-    private String cpf; 
 
-    @Column(length = 20) 
-    private String rg; 
+    @Column(length = 14)
+    private String cpf;
 
-    @Column(length = 1)
+    @Column(length = 20)
+    private String rg;
+
+    @Column(length = 20)
     private String sexo;
-    
-    @OneToMany
-    private List<Endereco> endereco;
-    
-    @OneToMany
-    private List<Telefone> telefone;
-    
-    @OneToMany
-    private List<Email> email;
-    
-      
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
+    private List<Endereco> enderecos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
+    private List<Telefone> telefones;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoa")
+    private List<Email> emails;
+
     //Getters and Setter..........................................................
     public Long getId() {
         return id;
@@ -116,68 +113,95 @@ public class Pessoa implements Serializable {
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
-    
-    
+
+    public List<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(List<Email> emails) {
+        this.emails = emails;
+    }
+
     //Method addTelefone........................................................    
-    public void addTelefone(Telefone t){
-        if(telefone == null)
-            telefone = new ArrayList<Telefone>();
-        if(!telefone.contains(t)){
-            telefone.add(t);
+    public void addTelefone(Telefone t) {
+        t.setPessoa(this);
+        if (telefones == null) {
+            telefones = new ArrayList<Telefone>();
         }
-        
-    }
-    
-    public void removeTelefone(Telefone t){
-        if(telefone.contains(t)){
-            telefone.remove(t);
+        if (!telefones.contains(t)) {
+            telefones.add(t);
         }
     }
-    
-    
+
+    public void removeTelefone(Telefone t) {
+        if (telefones.contains(t)) {
+            telefones.remove(t);
+        }
+    }
+
     //Method addEmail...........................................................
-    public void addEmail(Email e){
-        if(email == null)
-            email = new ArrayList<Email>();
-        if(!email.contains(e)){
-            email.add(e);
+    public void addEmail(Email e) {
+        e.setPessoa(this);
+        if (emails == null) {
+            emails = new ArrayList<Email>();
         }
-        
-    }
-    
-    public void removeEmail(Email e){
-        if(email.contains(e)){
-            email.remove(e);
+        if (!emails.contains(e)) {            
+            emails.add(e);
         }
     }
-    
+
+    public void removeEmail(Email e) {
+        if (emails.contains(e)) {
+            emails.remove(e);
+        }
+    }
+
     //Method addEndereco........................................................
-    public void addEndereco(Endereco e){
-        if(endereco == null){
-            endereco = new ArrayList<Endereco>();
+    public void addEndereco(Endereco e) {
+        e.setPessoa(this);
+        if (enderecos == null) {
+            enderecos = new ArrayList<Endereco>();
         }
-        if(!endereco.contains(e)){
-            endereco.add(e);
-        }
-    }
-    
-    public void removeEndereco(Endereco e){
-        if(endereco.contains(e)){
-            endereco.remove(e);
+        if (!enderecos.contains(e)) {
+            enderecos.add(e);
         }
     }
-    
+
+    public void removeEndereco(Endereco e) {
+        if (enderecos.contains(e)) {
+            enderecos.remove(e);
+        }
+    }
+
     //Equals and HashCode.......................................................
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.nome);
-        hash = 83 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 83 * hash + Objects.hashCode(this.cpf);
-        hash = 83 * hash + Objects.hashCode(this.rg);
-        hash = 83 * hash + Objects.hashCode(this.sexo);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.nome);
+        hash = 97 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 97 * hash + Objects.hashCode(this.cpf);
+        hash = 97 * hash + Objects.hashCode(this.rg);
+        hash = 97 * hash + Objects.hashCode(this.sexo);
+        hash = 97 * hash + Objects.hashCode(this.enderecos);
+        hash = 97 * hash + Objects.hashCode(this.telefones);
+        hash = 97 * hash + Objects.hashCode(this.emails);
         return hash;
     }
 
@@ -208,13 +232,23 @@ public class Pessoa implements Serializable {
         if (!Objects.equals(this.sexo, other.sexo)) {
             return false;
         }
+        if (!Objects.equals(this.enderecos, other.enderecos)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefones, other.telefones)) {
+            return false;
+        }
+        if (!Objects.equals(this.emails, other.emails)) {
+            return false;
+        }
         return true;
     }
+    
 
     //toString..................................................................
     @Override
     public String toString() {
         return nome;
     }
-    
+
 }

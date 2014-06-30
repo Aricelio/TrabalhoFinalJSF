@@ -2,7 +2,6 @@ package br.edu.ifnmg.tads.as.GerenciadorLogistica.Controller;
 
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess.ClienteDAO;
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Cliente;
-import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Cliente;
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Email;
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Endereco;
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Telefone;
@@ -24,21 +23,24 @@ public class ClienteController implements Serializable {
 
     @EJB
     ClienteDAO clienteDAO;
-    
+
     private Cliente entidade, filtro;
-    
+
     private List<Cliente> listagem;
-    
+
     private Email email;
     private Telefone telefone;
     private Endereco endereco;
-    
+
     //Constructor................................................................
     public ClienteController() {
         entidade = new Cliente();
         filtro = new Cliente();
+        email = new Email();
+        telefone = new Telefone();
+        endereco = new Endereco();
     }
-    
+
     //Method AutoCompletar......................................................
     public List<Cliente> autoCompletar(String texto) {
         Cliente tmp = new Cliente();
@@ -63,7 +65,6 @@ public class ClienteController implements Serializable {
         context.addMessage(null, new FacesMessage(msg));
     }
 
-    
     //Method Salvar.............................................................
     public void salvar() {
         if (clienteDAO.Salvar(entidade)) {
@@ -85,7 +86,7 @@ public class ClienteController implements Serializable {
             return r;
         }
     }
-    
+
     //Getters e Setters.........................................................
     public Cliente getEntidade() {
         return entidade;
@@ -133,45 +134,59 @@ public class ClienteController implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    
-    
+
     //Method for Add............................................................
-    public void addTelefone(){
-        //entidade = clienteDAO.Refresh(entidade.getId());
+    public void addTelefone() {
         entidade.addTelefone(telefone);
-        clienteDAO.Salvar(entidade);
-        telefone = new Telefone();
+        if (clienteDAO.Salvar(entidade)) {
+            exibirMensagem("Telefone adicionar com sucesso!");
+            telefone = new Telefone();
+        }
+        else{
+            exibirMensagem("Falha ao adicionar o telefone");
+        }
     }
-    
-    public void addEndereco(){
+
+    public void addEndereco() {
         entidade.addEndereco(endereco);
-        clienteDAO.Salvar(entidade);
-        endereco = new Endereco();
+        if (clienteDAO.Salvar(entidade)) {
+            exibirMensagem("Endereço adicionado com sucesso!");
+            endereco = new Endereco();
+        } else {
+            exibirMensagem("Falha ao adicionar o Endereço");
+        }
     }
-    
-    public void addEmail(){
+
+    public void addEmail() {
         entidade.addEmail(email);
-        clienteDAO.Salvar(entidade);
-        email = new Email();
+        if (clienteDAO.Salvar(entidade)) {
+            exibirMensagem("Email adicionado com sucesso!");
+            email = new Email();
+        } else {
+            exibirMensagem("Falha ao adicionar email!");
+        }
     }
-    
+
     //Methods for remove........................................................
-    public void removeEndereco(){
+    public void removeEndereco() {
         entidade.removeEndereco(endereco);
         clienteDAO.Salvar(entidade);
         endereco = new Endereco();
     }
-    
-    public void removeTelefone(){
+
+    public void removeTelefone() {
         entidade.removeTelefone(telefone);
         clienteDAO.Salvar(entidade);
         telefone = new Telefone();
     }
-     
-   public void removeEmail(){
+
+    public void removeEmail() {
         entidade.removeEmail(email);
-        clienteDAO.Salvar(entidade);
-        email = new Email();
-    } 
-    
+        if (clienteDAO.Salvar(entidade)) {
+            exibirMensagem("Email removido com sucesso!");
+            email = new Email();
+        } else {
+            exibirMensagem("Falha ao remover email!");
+        }
+    }
 }

@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class Funcionario extends Pessoa implements Serializable {
     
     //Attributes................................................................
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +28,6 @@ public class Funcionario extends Pessoa implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     private Cargo cargo;
-
     
     //Getters and Setters.......................................................
     public Long getId() {
@@ -38,7 +38,6 @@ public class Funcionario extends Pessoa implements Serializable {
         this.id = id;
     }
       
-
     public Cargo getCargo() {
         return cargo;
     }

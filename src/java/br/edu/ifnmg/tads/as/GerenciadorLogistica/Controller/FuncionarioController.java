@@ -23,21 +23,24 @@ public class FuncionarioController implements Serializable {
 
     @EJB
     FuncionarioDAO funcionarioDAO;
-    
+
     private Funcionario entidade, filtro;
-    
+
     private List<Funcionario> listagem;
-    
-    Email email;
-    Telefone telefone;
-    Endereco endereco;
-    
+
+    private Email email;
+    private Telefone telefone;
+    private Endereco endereco;
+
     //Constructor................................................................
     public FuncionarioController() {
         entidade = new Funcionario();
         filtro = new Funcionario();
+        email = new Email();
+        telefone = new Telefone();
+        endereco = new Endereco();
     }
-    
+
     //Method AutoCompletar......................................................
     public List<Funcionario> autoCompletar(String texto) {
         Funcionario tmp = new Funcionario();
@@ -62,12 +65,11 @@ public class FuncionarioController implements Serializable {
         context.addMessage(null, new FacesMessage(msg));
     }
 
-    
     //Method Salvar.............................................................
     public void salvar() {
         if (funcionarioDAO.Salvar(entidade)) {
             exibirMensagem("Salvo");
-            entidade = new Funcionario();
+    
         } else {
             exibirMensagem("Erro!");
         }
@@ -84,7 +86,7 @@ public class FuncionarioController implements Serializable {
             return r;
         }
     }
-    
+
     //Getters e Setters.........................................................
     public Funcionario getEntidade() {
         return entidade;
@@ -132,45 +134,74 @@ public class FuncionarioController implements Serializable {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    
-    
-    //Method for Add............................................................
-    public void addTelefone(){
-        //entidade = funcionarioDAO.Refresh(entidade.getId());
+
+    public FuncionarioDAO getFuncionarioDAO() {
+        return funcionarioDAO;
+    }
+
+    public void setFuncionarioDAO(FuncionarioDAO funcionarioDAO) {
+        this.funcionarioDAO = funcionarioDAO;
+    }
+
+    //Method for Addition.......................................................
+    public void addTelefone() {
         entidade.addTelefone(telefone);
-        funcionarioDAO.Salvar(entidade);
-        telefone = new Telefone();
+        if (funcionarioDAO.Salvar(entidade)) {
+            exibirMensagem("Telefone adicionado com sucesso!");
+            telefone = new Telefone();
+        } else {
+            exibirMensagem("Falha ao adicionar telefone!");
+        }
     }
-    
-    public void addEndereco(){
+
+    public void addEndereco() {
         entidade.addEndereco(endereco);
-        funcionarioDAO.Salvar(entidade);
-        endereco = new Endereco();
+        if(funcionarioDAO.Salvar(entidade)){
+            exibirMensagem("Endereço adicionado com sucesso!");
+            endereco = new Endereco();
+        } else {
+            exibirMensagem("Falha ao adicionar Endereço!");
+        }
     }
-    
-    public void addEmail(){
+
+    public void addEmail() {
         entidade.addEmail(email);
-        funcionarioDAO.Salvar(entidade);
-        email = new Email();
+        if(funcionarioDAO.Salvar(entidade)){
+            exibirMensagem("Email adicionado com sucesso!");
+            email = new Email();
+        } else {
+            exibirMensagem("Falha ao adicionar Email!");
+        }
     }
-    
-    //Methods for remove........................................................
-    public void removeEndereco(){
+
+    //Methods for removal.......................................................
+    public void removeEndereco() {
         entidade.removeEndereco(endereco);
-        funcionarioDAO.Salvar(entidade);
-        endereco = new Endereco();
+        if(funcionarioDAO.Salvar(entidade)){
+            exibirMensagem("Endereço removido com sucesso!");
+            endereco = new Endereco();
+        } else {
+            exibirMensagem("Falha ao remover Email!");
+        }
     }
-    
-    public void removeTelefone(){
+
+    public void removeTelefone() {
         entidade.removeTelefone(telefone);
-        funcionarioDAO.Salvar(entidade);
-        telefone = new Telefone();
+        if(funcionarioDAO.Salvar(entidade)){
+            exibirMensagem("Telefone removido com sucesso!");
+            telefone = new Telefone();
+        } else {
+            exibirMensagem("Falha ao remover Telefone!");
+        }
     }
-     
-   public void removeEmail(){
+
+    public void removeEmail() {
         entidade.removeEmail(email);
-        funcionarioDAO.Salvar(entidade);
-        email = new Email();
-    } 
-    
+        if(funcionarioDAO.Salvar(entidade)){
+            exibirMensagem("Email removido com sucesso!");
+            email = new Email();
+        } else {
+            exibirMensagem("Falha ao remover Email!");
+        }
+    }
 }

@@ -17,7 +17,6 @@ import javax.persistence.Table;
  * @author celio
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Telefones")
 public class Telefone implements Serializable {
     

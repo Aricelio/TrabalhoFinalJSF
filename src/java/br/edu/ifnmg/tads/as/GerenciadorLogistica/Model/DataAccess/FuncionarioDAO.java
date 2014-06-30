@@ -4,12 +4,14 @@ package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess;
 
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Funcionario;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author celio
  */
+@Stateless
 public class FuncionarioDAO extends DAOGenerico<Funcionario> {
    
     
@@ -27,6 +29,5 @@ public class FuncionarioDAO extends DAOGenerico<Funcionario> {
         }
         Query q = manager.createQuery(Consulta);
         return q.getResultList();
-    }
-    
+    } 
 }

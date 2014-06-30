@@ -6,28 +6,36 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
+    <h:head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Pagina Principal</title>
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />        
+        <title>SysCon Enterprise</title>
     </h:head>
 
     <h:body>
         <h:form>      
-            <div id="top">
-                <h1> Syscon Enterprise - Sistema de Gerenciamento de Logística </h1>
+            <div id="top" align="center">
+                <img src="./resources/imagens/logo2.jpg"></img>
+                <br/>
+                <b>Sistema de Gerenciamento de Logística</b>
             </div>
             <p:growl id="messages"/>
-            <p:menubar>                
+            <p:menubar>      
+                <p:menuitem value="Home" url="index.xhtml" />
+                
                 <p:submenu label="Clientes">                    
-                    <p:menuitem value="Novo Cliente" url="#" />
-                    <p:menuitem value="Buscar Cliente" url="#" />                                        
+                    <p:menuitem value="Novo Cliente" url="editarCliente.xhtml" />
+                    <p:menuitem value="Buscar Cliente" url="listagemCliente.xhtml" />                                        
                 </p:submenu>
+                
                 <p:submenu label="Funcionarios">                    
                     <p:menuitem value="Novo Funcionario" url="editarFuncionario.xhtml" />
-                    <p:menuitem value="Buscar Funcioanrio" url="#" />                                           
+                    <p:menuitem value="Buscar Funcioanrio" url="listagemFuncionario.xhtml" />   
+                    <p:menuitem value="Novo Cargo" url="editarCargo.xhtml" />   
+                    <p:menuitem value="Buscar Cargo" url="listagemCargo.xhtml" />   
                 </p:submenu>
+                
                 <p:submenu label="Veículos">                    
                     <p:menuitem value="Novo Veículo" url="#" />
                     <p:menuitem value="Buscar Veículos" url="#" />
@@ -57,10 +65,11 @@
                 <ui:insert name="content">Content</ui:insert>
             </div>
         </h:form> 
-        <div id="bottom">
+        <br/>
+        <div id="footer">            
             <h1>Copyright 2014 ACL Software</h1>
         </div>     
-        
+
     </h:body>
 
 </html>
