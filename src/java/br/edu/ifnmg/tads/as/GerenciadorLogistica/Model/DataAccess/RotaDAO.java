@@ -2,12 +2,14 @@ package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess;
 
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Rota;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author celio
  */
+@Stateless
 public class RotaDAO extends DAOGenerico<Rota> {
 
     //Constructor...............................................................

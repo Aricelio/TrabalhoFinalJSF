@@ -2,14 +2,15 @@ package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess;
 
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Usuario;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author celio
  */
+@Stateless
 public class UsuarioDAO extends DAOGenerico<Usuario> {
-
     //Constructor...............................................................
     public UsuarioDAO() {
         super(Usuario.class);

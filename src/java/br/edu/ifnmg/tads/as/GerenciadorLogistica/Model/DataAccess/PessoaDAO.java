@@ -4,12 +4,14 @@ package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess;
 
 import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Pessoa;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.persistence.Query;
 
 /**
  *
  * @author celio
  */
+@Stateless
 public class PessoaDAO extends DAOGenerico<Pessoa>{
 
     //Constructor...............................................................
