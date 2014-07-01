@@ -76,14 +76,16 @@ public class FuncionarioController implements Serializable {
     }
 
     //Method Apagar.............................................................
-    public String Apagar() {
-        String r = "";
-
+    public String apagar() {        
+        String retorno = "";
         if (funcionarioDAO.Apagar(entidade)) {
-            r = "listagemFuncionario.xhtml";
-            return r;
+            exibirMensagem("Registro apagado com sucesso!");
+            retorno = "listagemFuncionario.xhtml";
+            filtrar();
+            return retorno;
         } else {
-            return r;
+            exibirMensagem("Falha ao apagar registro!");
+            return retorno;
         }
     }
 
@@ -144,63 +146,69 @@ public class FuncionarioController implements Serializable {
     }
 
     //Method for Addition.......................................................
-    public void addTelefone() {
-        entidade.addTelefone(telefone);
-        if (funcionarioDAO.Salvar(entidade)) {
+    public void addTelefone() {        
+        try{
+            entidade.addTelefone(telefone);        
             exibirMensagem("Telefone adicionado com sucesso!");
             telefone = new Telefone();
-        } else {
+        } 
+        catch(Exception ex) {
             exibirMensagem("Falha ao adicionar telefone!");
         }
     }
 
-    public void addEndereco() {
-        entidade.addEndereco(endereco);
-        if(funcionarioDAO.Salvar(entidade)){
+    public void addEndereco() {        
+        try{
+            entidade.addEndereco(endereco);
             exibirMensagem("Endereço adicionado com sucesso!");
             endereco = new Endereco();
-        } else {
+        } 
+        catch(Exception ex){
             exibirMensagem("Falha ao adicionar Endereço!");
         }
     }
 
     public void addEmail() {
-        entidade.addEmail(email);
-        if(funcionarioDAO.Salvar(entidade)){
+        try{
+            entidade.addEmail(email);        
             exibirMensagem("Email adicionado com sucesso!");
             email = new Email();
-        } else {
+        } 
+        catch(Exception ex){
             exibirMensagem("Falha ao adicionar Email!");
         }
     }
 
     //Methods for removal.......................................................
     public void removeEndereco() {
-        entidade.removeEndereco(endereco);
-        if(funcionarioDAO.Salvar(entidade)){
+        try{
+            entidade.removeEndereco(endereco);        
             exibirMensagem("Endereço removido com sucesso!");
             endereco = new Endereco();
-        } else {
+        }
+        catch(Exception ex){
             exibirMensagem("Falha ao remover Email!");
         }
     }
 
     public void removeTelefone() {
-        entidade.removeTelefone(telefone);
-        if(funcionarioDAO.Salvar(entidade)){
+        try{
+            entidade.removeTelefone(telefone);        
             exibirMensagem("Telefone removido com sucesso!");
             telefone = new Telefone();
-        } else {
+        } 
+        catch(Exception ex) {
             exibirMensagem("Falha ao remover Telefone!");
         }
     }
 
     public void removeEmail() {
-        entidade.removeEmail(email);
-        if(funcionarioDAO.Salvar(entidade)){
+        try{
+            entidade.removeEmail(email);
             exibirMensagem("Email removido com sucesso!");
             email = new Email();
-        } else {
+        }
+        catch(Exception ex){
             exibirMensagem("Falha ao remover Email!");
         }
     }

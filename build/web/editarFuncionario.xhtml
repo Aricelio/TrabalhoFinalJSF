@@ -53,6 +53,9 @@
                                 <p:outputLabel value="Rua:" />
                                 <p:inputText value="#{funcionarioController.endereco.rua}" /> 
 
+                                <p:outputLabel value="Numero: " />
+                                <p:inputText value="#{funcionarioController.endereco.numero}"  /> 
+                                
                                 <p:outputLabel value="Complemento: " />
                                 <p:inputText value="#{funcionarioController.endereco.complemento}"  /> 
 
@@ -67,10 +70,11 @@
                             </p:panelGrid>  
                             <br/>
                             <p:commandButton  id="btnAdicionarEndereco" value="Adicionar" 
-                                              action="#{funcionarioController.addEndereco()}" onclick="msgSalvar.show();"/>
+                                              action="#{funcionarioController.addEndereco()}" update="listagemEnderecos" />
                             
-                            <p:dataTable id="listagemEnderecos" value="#{funcionarioController.entidade.enderecos}" var="item">                                 
+                            <p:dataTable id="listagemEnderecos" value="#{funcionarioController.entidade.enderecos}" var="item" lazy="true">                                 
                                 <p:column sortBy="rua" headerText="Rua" >#{item.rua}</p:column>                      
+                                <p:column sortBy="numero" headerText="Numero" >#{item.numero}</p:column>
                                 <p:column sortBy="complemento" headerText="Compl." >#{item.complemento}</p:column>
                                 <p:column sortBy="bairro" headerText="Bairro" >#{item.bairro}</p:column>
                                 <p:column sortBy="cidade" headerText="Cidade" >#{item.cidade}</p:column>
@@ -95,9 +99,9 @@
                             </p:panelGrid>
                             <br/>
                             <p:commandButton  id="btnAdicionarEmail" value="Adicionar" 
-                                              action="#{funcionarioController.addEmail()}" onclick="msgSalvar.show();"/>
+                                              action="#{funcionarioController.addEmail()}" update="listagemEmails"/>
 
-                            <p:dataTable id="listagemEmails" value="#{funcionarioController.entidade.emails}" var="item">
+                            <p:dataTable id="listagemEmails" value="#{funcionarioController.entidade.emails}" var="item" lazy="true">
                                 <p:column sortBy="id" headerText="Código" >#{item.id}</p:column>  
                                 <p:column sortBy="nome" headerText="E-mail" >#{item.email}</p:column>                      
                                 
@@ -121,9 +125,9 @@
                             </p:panelGrid>
                             <br/>
                             <p:commandButton  id="btnAdicionarTelefone" value="Adicionar" 
-                                              action="#{funcionarioController.addTelefone()}"  onclick="msgSalvar.show();"/>
+                                              action="#{funcionarioController.addTelefone()}"  update="listagemTelefones"/>
                             
-                            <p:dataTable id="listagemTelefones" value="#{funcionarioController.entidade.telefones}" var="item">                                
+                            <p:dataTable id="listagemTelefones" value="#{funcionarioController.entidade.telefones}" var="item" lazy="true">                                
                                 <p:column sortBy="nome" headerText="DDD" >#{item.ddd}</p:column>                      
                                 <p:column sortBy="nome" headerText="Telefone" >#{item.numero}</p:column>
                                 
@@ -144,19 +148,19 @@
                         <p:commandButton  ajax="false" id="btnVoltar" value="Voltar"  action="index.xhtml"/>            
                     </f:facet>
 
+                    <!-- Caixa de confirmação para o botão Salvar............................................................. -->
                     <p:confirmDialog message="Deseja realmente salvar as alterações?" header="Confirmação" severity="alert"
                                      widgetVar="msgSalvar" >
                         <p:commandButton ajax="false" value="Sim" action="#{funcionarioController.salvar()}"/>
                         <p:commandButton value="Não" onclick="msgSalvar.hide();" />
                     </p:confirmDialog>
 
-
+                    <!-- Caixa de confirmação para o botão Apagar............................................................. -->
                     <p:confirmDialog message="Deseja realmente apagar o registro?" header="Confirmação" severity="alert"
                                      widgetVar="msgApagar" >
                         <p:commandButton ajax="false" value="Sim" action="#{funcionarioController.apagar()}"/>
                         <p:commandButton value="Não" onclick="msgApagar.hide();" />
                     </p:confirmDialog>
-                    
                 </p:panel>
             </ui:define>
         </ui:composition> 

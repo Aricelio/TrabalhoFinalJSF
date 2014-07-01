@@ -1,7 +1,7 @@
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.Controller;
 
-import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess.CargoDAO;
-import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Cargo;
+import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DataAccess.VeiculoDAO;
+import br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel.Veiculo;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -14,39 +14,39 @@ import javax.faces.context.FacesContext;
  *
  * @author celio
  */
-@Named(value = "cargoController")
+@Named(value = "veiculoController")
 @SessionScoped
-public class CargoController implements Serializable {
+public class VeiculoController implements Serializable {
 
     @EJB
-    CargoDAO cargoDAO;
+    VeiculoDAO veiculoDAO;
     
-    private Cargo entidade, filtro;
+    private Veiculo entidade, filtro;
     
-    private List<Cargo> listagem;
+    private List<Veiculo> listagem;
     
     //Constructor................................................................
-    public CargoController() {
-        entidade = new Cargo();
-        filtro = new Cargo();
+    public VeiculoController() {
+        entidade = new Veiculo();
+        filtro = new Veiculo();
     }
     
     //Method AutoCompletar......................................................
-    public List<Cargo> autoCompletar(String texto) {
-        Cargo tmp = new Cargo();
-        tmp.setNome(texto);
-        return cargoDAO.Buscar(tmp);
+    public List<Veiculo> autoCompletar(String texto) {
+        Veiculo tmp = new Veiculo();
+        tmp.setModelo(texto);
+        return veiculoDAO.Buscar(tmp);
     }
 
     //Method Filtrar............................................................
     public void filtrar() {
-        listagem = cargoDAO.Buscar(filtro);
+        listagem = veiculoDAO.Buscar(filtro);
     }
 
     //Method Novo...............................................................
     public String novo() {
-        entidade = new Cargo();
-        return "editarCargo.xhtml";
+        entidade = new Veiculo();
+        return "editarVeiculo.xhtml";
     }
 
     //Method ExibirMensagem.....................................................
@@ -58,47 +58,47 @@ public class CargoController implements Serializable {
     
     //Method Salvar.............................................................
     public void salvar() {
-        if (cargoDAO.Salvar(entidade)) {
-            exibirMensagem("Salvo");
-            entidade = new Cargo();
+        if (veiculoDAO.Salvar(entidade)) {
+            exibirMensagem("Veiculo Salvo com Sucesso!");
+            entidade = new Veiculo();
         } else {
-            exibirMensagem("Erro!");
+            exibirMensagem("Erro! Não foi possivel salvar o veiculo!");
         }
     }
 
     //Method Apagar.............................................................
     public String apagar() {
-        String r = "";
+        String retorno = "";
 
-        if (cargoDAO.Apagar(entidade)) {
-            r = "listagemCargo.xhtml";
-            return r;
+        if (veiculoDAO.Apagar(entidade)) {
+            retorno = "listagemVeiculo.xhtml";
+            return retorno;
         } else {
-            return r;
+            return retorno;
         }
     }
     
     //Getters e Setters.........................................................
-    public Cargo getEntidade() {
+    public Veiculo getEntidade() {
         return entidade;
     }
 
-    public void setEntidade(Cargo entidade) {
+    public void setEntidade(Veiculo entidade) {
         this.entidade = entidade;
     }
 
-    public List<Cargo> getListagem() {
+    public List<Veiculo> getListagem() {
         if (listagem == null) {
-            listagem = cargoDAO.Buscar(entidade);
+            listagem = veiculoDAO.Buscar(entidade);
         }
         return listagem;
     }
 
-    public Cargo getFiltro() {
+    public Veiculo getFiltro() {
         return filtro;
     }
 
-    public void setFiltro(Cargo filtro) {
+    public void setFiltro(Veiculo filtro) {
         this.filtro = filtro;
     }
     

@@ -15,12 +15,12 @@
                     <p:panelGrid columns="2">                                                
 
                         <p:outputLabel value="Nome:" />
-                        <p:inputText value="#" 
+                        <p:inputText value="#{cargoController.entidade.nome}" 
                                      required="true" 
                                      requiredMessage="O campo 'Nome' é de preenchimento obrigatório!"  /> 
 
                         <p:outputLabel value="Descrição:" />
-                        <p:inputText value="#" 
+                        <p:inputText value="#{cargoController.entidade.descricao}" 
                                      required="true" 
                                      requiredMessage="O campo 'Descrição:' é de preenchimento obrigatório!"  /> 
 
@@ -32,16 +32,18 @@
                         <p:commandButton  ajax="false" id="btnVoltar" value="Voltar"  action="index.xhtml"/>            
                     </f:facet>
 
+                    <!-- Caixa de Confirmação para o botão 'Salvar'............................................................ -->
                     <p:confirmDialog message="Deseja realmente salvar as alterações?" header="Confirmação" severity="alert"
                                      widgetVar="msgSalvar" >
-                        <p:commandButton ajax="false" value="Sim" />
+                        <p:commandButton ajax="false" value="Sim" action="#{cargoController.salvar()}" />
                         <p:commandButton value="Não" onclick="msgSalvar.hide();" />
                     </p:confirmDialog>
 
-
+                    
+                    <!-- Caixa de Confirmação para o botão 'Apagar'............................................................ -->
                     <p:confirmDialog message="Deseja realmente apagar o registro?" header="Confirmação" severity="alert"
                                      widgetVar="msgApagar" >
-                        <p:commandButton ajax="false" value="Sim" />
+                        <p:commandButton ajax="false" value="Sim" action="#{cargoController.apagar}"/>
                         <p:commandButton value="Não" onclick="msgApagar.hide();" />
                     </p:confirmDialog>
 

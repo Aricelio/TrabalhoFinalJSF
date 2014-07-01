@@ -12,16 +12,13 @@
                 <p:panelGrid columns="2" >      
                     <p:outputLabel value="Nome: "/>
                     <p:inputText  value="#{funcionarioController.filtro.nome}"/>
-                    
-                                                     
                 </p:panelGrid>
-
 
                 <p:commandButton value="Filtrar" action="#{funcionarioController.filtrar()}" update="listagem" />
                 <p:commandButton value="Novo" ajax="false" action="#{funcionarioController.novo()}" style="float: right"/> 
 
 
-                <p:dataTable id="listagem" value="#{funcionarioController.listagem}" var="item">
+                <p:dataTable id="listagem" value="#{funcionarioController.listagem}" var="item" lazy="true">
                     <p:column sortBy="id" headerText="Código" >#{item.id}</p:column>  
                     <p:column sortBy="nome" headerText="Nome" >#{item.nome}</p:column>                      
                     <p:column sortBy="cpf" headerText="CPF" >#{item.cpf}</p:column>  
@@ -32,10 +29,16 @@
                         </p:outputLabel>
                     </p:column>
 
-                    <p:column>
-                        <p:commandButton value="Editar" action="editarFuncionario.xhtml">
+                    <p:column headerText="Edição" >
+                        <p:commandButton value="Editar" action="editarFuncionario.xhtml" style="alignment-adjust: middle">
                             <f:setPropertyActionListener target="#{funcionarioController.entidade}" 
                                                          value="#{item}" /> 
+                        </p:commandButton>                                 
+                    </p:column>
+                    <p:column headerText="Remoção">
+                        <p:commandButton value="Remover" action="#{funcionarioController.apagar()}" update="listagem">
+                            <f:setPropertyActionListener target="#{funcionarioController.entidade}" 
+                                                         value="#{item}"/> 
                         </p:commandButton>                                 
                     </p:column>
                 </p:dataTable>
