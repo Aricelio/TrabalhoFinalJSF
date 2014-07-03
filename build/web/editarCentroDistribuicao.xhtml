@@ -24,9 +24,10 @@
                                              requiredMessage="O campo 'Nome' é de preenchimento obrigatório!"  /> 
 
                                 <p:outputLabel value="CNPJ:" />
-                                <p:inputMask value="#{centroDistribuicaoController.entidade.cnpj}" mask="999.999.999-99"                    
+                                <p:inputMask value="#{centroDistribuicaoController.entidade.cnpj}" 
+                                             mask="99.999.999/9999-99"                  
                                              required="true" 
-                                             requiredMessage="O campo 'CPF' é de preenchimento obrigatório!"  /> 
+                                             requiredMessage="O campo 'CNPJ' é de preenchimento obrigatório!"  /> 
 
                             </p:panelGrid>
                         </p:tab>

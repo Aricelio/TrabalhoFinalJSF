@@ -17,17 +17,20 @@
                     <p:inputText  value="#{veiculoController.filtro.modelo}"/>                                                      
                 </p:panelGrid>
 
-
+                <br/>
                 <p:commandButton value="Filtrar" action="#{veiculoController.filtrar()}" update="listagem" />
                 <p:commandButton value="Novo" ajax="false" action="#{veiculoController.novo()}" style="float: right"/> 
-
+                <br/>
 
                 <p:dataTable id="listagem" value="#{veiculoController.listagem}" var="item">
                     <p:column sortBy="id" headerText="Código" >#{item.id}</p:column>  
                     <p:column sortBy="modelo" headerText="Modelo" >#{item.modelo}</p:column>                      
                     <p:column sortBy="marca" headerText="Marca" >#{item.marca}</p:column>  
                     <p:column sortBy="ano" headerText="Ano" >#{item.ano}</p:column>                      
-
+                    <p:column sortBy="placa" headerText="Placa" >#{item.placa}</p:column>                      
+                    <p:column sortBy="centroDistribuicao" 
+                              headerText="Centro de Distribuição" >#{item.centroDistribuicao.nome}</p:column>
+                    
                     <p:column>
                         <p:commandButton value="Editar" action="editarVeiculo.xhtml">
                             <f:setPropertyActionListener target="#{veiculoController.entidade}" 

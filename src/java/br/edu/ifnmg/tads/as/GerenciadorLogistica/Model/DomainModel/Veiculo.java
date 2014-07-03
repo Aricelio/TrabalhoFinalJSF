@@ -36,6 +36,9 @@ public class Veiculo implements Serializable {
     
     private int ano;
     
+    @Column(length = 50)
+    private String placa;
+    
     @ManyToOne
     private CentroDistribuicao centroDistribuicao;
     
@@ -80,16 +83,25 @@ public class Veiculo implements Serializable {
     public void setCentroDistribuicao(CentroDistribuicao centroDistribuicao) {
         this.centroDistribuicao = centroDistribuicao;
     }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
     
     //Equals and HashCode.......................................................
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.modelo);
-        hash = 97 * hash + Objects.hashCode(this.marca);
-        hash = 97 * hash + this.ano;
-        hash = 97 * hash + Objects.hashCode(this.centroDistribuicao);
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        hash = 31 * hash + Objects.hashCode(this.modelo);
+        hash = 31 * hash + Objects.hashCode(this.marca);
+        hash = 31 * hash + this.ano;
+        hash = 31 * hash + Objects.hashCode(this.placa);
+        hash = 31 * hash + Objects.hashCode(this.centroDistribuicao);
         return hash;
     }
 
@@ -114,6 +126,9 @@ public class Veiculo implements Serializable {
         if (this.ano != other.ano) {
             return false;
         }
+        if (!Objects.equals(this.placa, other.placa)) {
+            return false;
+        }
         if (!Objects.equals(this.centroDistribuicao, other.centroDistribuicao)) {
             return false;
         }
@@ -122,7 +137,8 @@ public class Veiculo implements Serializable {
     
     @Override
     public String toString() {
-        return marca + " " + modelo + " " + ano;
+        return "Marca: " + marca + ", Modelo: " + modelo + ", Ano: " + ano 
+                + "Placa: " + placa;
     }
     
 }

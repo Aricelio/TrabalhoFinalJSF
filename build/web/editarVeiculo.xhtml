@@ -24,7 +24,7 @@
                             <f:selectItem itemLabel="Honda" itemValue="Honda" />
                             <f:selectItem itemLabel="Hyundai" itemValue="Hyundai" />                            
                         </p:selectOneMenu>                       
-                        
+
                         <p:outputLabel value="Modelo:" />
                         <p:inputText value="#{veiculoController.entidade.modelo}" 
                                      required="true" 
@@ -51,8 +51,18 @@
                             <f:selectItem itemLabel="1998" itemValue="1998" />
                             <f:selectItem itemLabel="1997" itemValue="1997" />
                         </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Placa:" />
+                        <p:inputMask value="#{veiculoController.entidade.placa}" mask="aaa-9999"                    
+                                             required="true" 
+                                             requiredMessage="O campo 'Placa' é de preenchimento obrigatório!"  /> 
+
 
                         <p:outputLabel value="Centro de Distribuição:" />
+                        <p:selectOneMenu value="#{veiculoController.entidade.centroDistribuicao}" 
+                                         converter="#{centroDistribuicaoConverter}">
+                            <f:selectItems value="#{centroDistribuicaoController.listagem}" />
+                        </p:selectOneMenu>
                     </p:panelGrid>  
 
 
