@@ -36,6 +36,9 @@ public class CentroDistribuicaoController implements Serializable {
     public CentroDistribuicaoController() {
         entidade = new CentroDistribuicao();
         filtro = new CentroDistribuicao();
+        endereco = new Endereco();
+        email = new Email();
+        telefone = new Telefone();
     }
     
     //Method AutoCompletar......................................................
@@ -136,41 +139,70 @@ public class CentroDistribuicaoController implements Serializable {
     
     //Method for Add............................................................
     public void addTelefone(){
-        //entidade = centroDistribuicaoDAO.Refresh(entidade.getId());
-        entidade.addTelefone(telefone);
-        centroDistribuicaoDAO.Salvar(entidade);
-        telefone = new Telefone();
+        try{
+            entidade.addTelefone(telefone);        
+            exibirMensagem("Telefone adicionado com sucesso!");
+            telefone = new Telefone();
+        } 
+        catch(Exception ex) {
+            exibirMensagem("Falha ao adicionar telefone!");
+        }
     }
     
     public void addEndereco(){
-        entidade.addEndereco(endereco);
-        centroDistribuicaoDAO.Salvar(entidade);
-        endereco = new Endereco();
+        try{
+            entidade.addEndereco(endereco);
+            exibirMensagem("Endereço adicionado com sucesso!");
+            endereco = new Endereco();
+        } 
+        catch(Exception ex){
+            exibirMensagem("Falha ao adicionar Endereço!");
+        }
     }
     
     public void addEmail(){
-        entidade.addEmail(email);
-        centroDistribuicaoDAO.Salvar(entidade);
-        email = new Email();
+        try{
+            entidade.addEmail(email);        
+            exibirMensagem("Email adicionado com sucesso!");
+            email = new Email();
+        } 
+        catch(Exception ex){
+            exibirMensagem("Falha ao adicionar Email!");
+        }
     }
     
     //Methods for remove........................................................
     public void removeEndereco(){
-        entidade.removeEndereco(endereco);
-        centroDistribuicaoDAO.Salvar(entidade);
-        endereco = new Endereco();
+        try{
+            entidade.removeEndereco(endereco);        
+            exibirMensagem("Endereço removido com sucesso!");
+            endereco = new Endereco();
+        }
+        catch(Exception ex){
+            exibirMensagem("Falha ao remover Email!");
+        }
     }
     
     public void removeTelefone(){
-        entidade.removeTelefone(telefone);
-        centroDistribuicaoDAO.Salvar(entidade);
-        telefone = new Telefone();
+        try{
+            entidade.removeTelefone(telefone);        
+            exibirMensagem("Telefone removido com sucesso!");
+            telefone = new Telefone();
+        } 
+        catch(Exception ex) {
+            exibirMensagem("Falha ao remover Telefone!");
+        }
     }
      
    public void removeEmail(){
-        entidade.removeEmail(email);
-        centroDistribuicaoDAO.Salvar(entidade);
-        email = new Email();
+        try{
+            entidade.removeEmail(email);
+            exibirMensagem("Email removido com sucesso!");
+            email = new Email();
+        }
+        catch(Exception ex){
+            exibirMensagem("Falha ao remover Email!");
+        }
     } 
     
 }

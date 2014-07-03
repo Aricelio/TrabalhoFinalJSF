@@ -15,26 +15,23 @@
                 <p:panel style="font: medium; color: black" >
                     <p:panelGrid columns="2">                                                
 
+                        <p:outputLabel value="Marca:" />
+                        <p:selectOneMenu id="marca" value="#{veiculoController.entidade.marca}">
+                            <f:selectItem itemLabel="Fiat" itemValue="Fiat" />
+                            <f:selectItem itemLabel="Mercedes Benz" itemValue="Mercedes Benz" />
+                            <f:selectItem itemLabel="Toyota" itemValue="Toyota" />
+                            <f:selectItem itemLabel="Volkswagen" itemValue="Volkswagen" />
+                            <f:selectItem itemLabel="Honda" itemValue="Honda" />
+                            <f:selectItem itemLabel="Hyundai" itemValue="Hyundai" />                            
+                        </p:selectOneMenu>                       
+                        
                         <p:outputLabel value="Modelo:" />
                         <p:inputText value="#{veiculoController.entidade.modelo}" 
                                      required="true" 
                                      requiredMessage="O campo 'Nome' é de preenchimento obrigatório!"  /> 
 
-                        <p:outputLabel value="Marca:" />
-                        <p:inputText value="#{veiculoController.entidade.marca}" 
-                                     required="true" 
-                                     requiredMessage="O campo 'Descrição:' é de preenchimento obrigatório!"  /> 
-
-                        <p:outputLabel value="Ano:" />
-                        <p:selectOneMenu id="sexo" value="#{funcionarioController.entidade.sexo}">
-                            <f:selectItem itemLabel="Masculino" itemValue="M" />
-                            <f:selectItem itemLabel="Feminino" itemValue="F" />
-                        </p:selectOneMenu>
-
-
-
-
-                        <p:selectOneListbox id="basic" value="#{veiculoController.entidade.ano}">
+                        <p:outputLabel value="Ano:" />                        
+                        <p:selectOneMenu id="ano" value="#{veiculoController.entidade.ano}">
                             <f:selectItem itemLabel="2014" itemValue="2014" />
                             <f:selectItem itemLabel="2013" itemValue="2013" />
                             <f:selectItem itemLabel="2012" itemValue="2012" />
@@ -53,18 +50,16 @@
                             <f:selectItem itemLabel="1999" itemValue="1999" />
                             <f:selectItem itemLabel="1998" itemValue="1998" />
                             <f:selectItem itemLabel="1997" itemValue="1997" />
-                        </p:selectOneListbox>
+                        </p:selectOneMenu>
 
                         <p:outputLabel value="Centro de Distribuição:" />
-
                     </p:panelGrid>  
 
 
                     <!-- Botões Salvar e Apagar................................................................................ -->
                     <f:facet name="footer">
                         <p:commandButton  id="btnSalvar" value="Salvar"  onclick="msgSalvar.show();"/>
-                        <p:commandButton  id="btnApagar" value="Apagar"  onclick="msgApagar.show();"/>
-                        <p:commandButton  ajax="false" id="btnVoltar" value="Voltar"  action="index.xhtml"/>            
+                        <p:commandButton  id="btnApagar" value="Apagar"  onclick="msgApagar.show();"/>                        
                     </f:facet>
 
                     <!-- Caixa de Confirmação para o botão 'Salvar'............................................................ -->

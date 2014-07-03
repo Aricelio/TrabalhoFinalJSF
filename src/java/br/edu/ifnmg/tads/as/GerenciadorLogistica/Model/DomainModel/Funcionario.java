@@ -3,6 +3,8 @@
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel;
 
 import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,8 +21,7 @@ import javax.persistence.Table;
 @Table(name = "Funcionarios")
 public class Funcionario extends Pessoa implements Serializable {
     
-    //Attributes................................................................
-    
+    //Attributes................................................................    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +29,12 @@ public class Funcionario extends Pessoa implements Serializable {
     
     @ManyToOne(fetch = FetchType.EAGER)
     private Cargo cargo;
+    
+    @Column(length = 250)
+    private String login;
+    
+    @Column(length = 250)
+    private String senha;
     
     //Getters and Setters.......................................................
     public Long getId() {
@@ -45,25 +52,55 @@ public class Funcionario extends Pessoa implements Serializable {
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
     
     //Equals and HashCode.......................................................
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.cargo);
+        hash = 53 * hash + Objects.hashCode(this.login);
+        hash = 53 * hash + Objects.hashCode(this.senha);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Funcionario)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Funcionario other = (Funcionario) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Funcionario other = (Funcionario) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.cargo, other.cargo)) {
+            return false;
+        }
+        if (!Objects.equals(this.login, other.login)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
         return true;
-    }
+    }   
 }

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./Global.xhtml" >
+            <ui:define name="content">    
+
+                <p:panelGrid columns="2" >      
+                    <p:outputLabel value="Nome: "/>
+                    <p:inputText  value="#{centroDistribuicaoController.filtro.nome}"/>
+                </p:panelGrid>
+                <br/>
+                <p:commandButton value="Filtrar" action="#{centroDistribuicaoController.filtrar()}" update="listagem" />
+                <p:commandButton value="Novo" ajax="false" action="#{centroDistribuicaoController.novo()}" style="float: right"/> 
+
+                
+                <!--Tabela de Centros de Distribuicao............................................................................ -->
+                <p:dataTable id="listagem" value="#{centroDistribuicaoController.listagem}" var="item" lazy="true">
+                    <p:column sortBy="id" headerText="Código" >#{item.id}</p:column>  
+                    <p:column sortBy="nome" headerText="Nome" >#{item.nome}</p:column>                      
+                    <p:column sortBy="cpf" headerText="CNPJ" >#{item.cnpj}</p:column>  
+                    
+
+                    <!-- Coluna para Edição-->
+                    <p:column headerText="Edição" style="alignment-adjust: middle">
+                        <p:commandButton value="Editar" action="editarCentroDistribuicao.xhtml" style="alignment-adjust: middle">
+                            <f:setPropertyActionListener target="#{centroDistribuicaoController.entidade}" 
+                                                         value="#{item}" /> 
+                        </p:commandButton>                                 
+                    </p:column>
+                    
+                    <!-- Coluna para remoção-->
+                    <p:column headerText="Remoção">
+                        <p:commandButton value="Remover" action="#{centroDistribuicaoController.apagar()}" update="listagem">
+                            <f:setPropertyActionListener target="#{centroDistribuicaoController.entidade}" 
+                                                         value="#{item}"/> 
+                        </p:commandButton>                                 
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
+

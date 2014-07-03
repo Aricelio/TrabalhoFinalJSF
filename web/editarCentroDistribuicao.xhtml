@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>SysCon Enterprise - Funcionario</title>
+        <title>SysCon Enterprise - Centros de Distribuição</title>
     </h:head>
     <h:body>
         <ui:composition template="./Global.xhtml" >
@@ -19,65 +19,36 @@
                         <p:tab title="Dados Gerais" >
                             <p:panelGrid columns="2">
                                 <p:outputLabel value="Nome:" />
-                                <p:inputText value="#{funcionarioController.entidade.nome}" 
+                                <p:inputText value="#{centroDistribuicaoController.entidade.nome}" 
                                              required="true" 
                                              requiredMessage="O campo 'Nome' é de preenchimento obrigatório!"  /> 
 
-                                <p:outputLabel value="CPF:" />
-                                <p:inputMask value="#{funcionarioController.entidade.cpf}" mask="999.999.999-99"                    
+                                <p:outputLabel value="CNPJ:" />
+                                <p:inputMask value="#{centroDistribuicaoController.entidade.cnpj}" mask="999.999.999-99"                    
                                              required="true" 
                                              requiredMessage="O campo 'CPF' é de preenchimento obrigatório!"  /> 
-
-                                <p:outputLabel value="RG:" />
-                                <p:inputText value="#{funcionarioController.entidade.rg}" 
-                                             required="true" 
-                                             requiredMessage="O campo 'RG' é de preenchimento obrigatório!"  /> 
-
-                                <p:outputLabel value="Sexo: " />
-                                <p:selectOneMenu id="sexo" value="#{funcionarioController.entidade.sexo}">
-                                    <f:selectItem itemLabel="Masculino" itemValue="M" />
-                                    <f:selectItem itemLabel="Feminino" itemValue="F" />
-                                </p:selectOneMenu>
-
-                                <p:outputLabel value="Data Nasc.:" />
-                                <p:calendar value="#{funcionarioController.entidade.dataNascimento}" /> 
-
-                                <p:outputLabel value="Cargo:" />
-                                <p:selectOneMenu value="#{funcionarioController.entidade.cargo}" converter="#{cargoConverter}">
-                                    <f:selectItems value="#{cargoController.listagem}" />
-                                </p:selectOneMenu>
-                                
-                                <p:outputLabel value="Login: "/>
-                                <p:inputText value="#{funcionarioController.entidade.login}" 
-                                             required="true" 
-                                             requiredMessage="O campo 'Login' é de preenchimento obrigatório!"  /> 
-                                
-                                <p:outputLabel value="Senha: "/>
-                                <p:inputText value="#{funcionarioController.entidade.senha}" 
-                                             required="true" 
-                                             requiredMessage="O campo 'Senha' é de preenchimento obrigatório!"  /> 
 
                             </p:panelGrid>
                         </p:tab>
 
                         <!-- Endereços.......................................................................................-->
-                        <p:tab title="Endereços" >
+                        <p:tab title="Endereço" >
                             <p:panelGrid columns="2">
 
                                 <p:outputLabel value="Rua:" />
-                                <p:inputText value="#{funcionarioController.endereco.rua}" /> 
+                                <p:inputText value="#{centroDistribuicaoController.endereco.rua}" /> 
 
                                 <p:outputLabel value="Numero: " />
-                                <p:inputText value="#{funcionarioController.endereco.numero}"  /> 
+                                <p:inputText value="#{centroDistribuicaoController.endereco.numero}"  /> 
 
                                 <p:outputLabel value="Complemento: " />
-                                <p:inputText value="#{funcionarioController.endereco.complemento}"  /> 
+                                <p:inputText value="#{centroDistribuicaoController.endereco.complemento}"  /> 
 
                                 <p:outputLabel value="Bairro:" />
-                                <p:inputText value="#{funcionarioController.endereco.bairro}" /> 
+                                <p:inputText value="#{centroDistribuicaoController.endereco.bairro}" /> 
 
                                 <p:outputLabel value="Cidade:" />
-                                <p:inputText value="#{funcionarioController.endereco.cidade}" /> 
+                                <p:inputText value="#{centroDistribuicaoController.endereco.cidade}" /> 
 
                                 <p:outputLabel value="Estado:" />
                                 <p:selectOneMenu id="uf" value="#{funcionarioController.endereco.estado}">
@@ -109,23 +80,23 @@
                                     <f:selectItem itemLabel="SE" itemValue="SE" />
                                     <f:selectItem itemLabel="TO" itemValue="TO" />
                                 </p:selectOneMenu>
-                                
                             </p:panelGrid>  
                             <br/>
                             <p:commandButton  id="btnAdicionarEndereco" value="Adicionar" 
-                                              action="#{funcionarioController.addEndereco()}" update="listagemEnderecos" />                            
+                                              action="#{centroDistribuicaoController.addEndereco()}" update="listagemEnderecos" />                            
+                            <br/>
 
                             <!-- Lista de endereços.........................................................................................-->
-                            <p:dataTable id="listagemEnderecos" value="#{funcionarioController.entidade.enderecos}" var="item" lazy="true">                                 
+                            <p:dataTable id="listagemEnderecos" value="#{centroDistribuicaoController.entidade.enderecos}" var="item" lazy="true">                                 
                                 <p:column sortBy="rua" headerText="Rua" >#{item.rua}</p:column>                      
                                 <p:column sortBy="numero" headerText="Numero" >#{item.numero}</p:column>
-                                <p:column sortBy="complemento" headerText="Compl." >#{item.complemento}</p:column>
+                                <p:column sortBy="complemento" headerText="Complemento" >#{item.complemento}</p:column>
                                 <p:column sortBy="bairro" headerText="Bairro" >#{item.bairro}</p:column>
                                 <p:column sortBy="cidade" headerText="Cidade" >#{item.cidade}</p:column>
                                 <p:column sortBy="estado" headerText="Estado" >#{item.estado}</p:column>
 
                                 <p:column>
-                                    <p:commandButton value="Remover" action="#{funcionarioController.entidade.removeEndereco(item)}"
+                                    <p:commandButton value="Remover" action="#{centroDistribuicaoController.entidade.removeEndereco(item)}"
                                                      update="listagemEnderecos"> 
                                     </p:commandButton>                                 
                                 </p:column>
@@ -138,19 +109,20 @@
                             <p:panelGrid columns="2">
 
                                 <p:outputLabel value="E-mail:" />
-                                <p:inputText value="#{funcionarioController.email.email}"/> 
+                                <p:inputText value="#{centroDistribuicaoController.email.email}"/> 
                             </p:panelGrid>
                             <br/>
                             <p:commandButton  id="btnAdicionarEmail" value="Adicionar" 
-                                              action="#{funcionarioController.addEmail()}" update="listagemEmails"/>
+                                              action="#{centroDistribuicaoController.addEmail()}" update="listagemEmails"/>
+                            <br/>
 
                             <!-- Lista de Emails........................................................................................-->
-                            <p:dataTable id="listagemEmails" value="#{funcionarioController.entidade.emails}" var="item" lazy="true">
+                            <p:dataTable id="listagemEmails" value="#{centroDistribuicaoController.entidade.emails}" var="item" lazy="true">
                                 <p:column sortBy="id" headerText="Código" >#{item.id}</p:column>  
                                 <p:column sortBy="nome" headerText="E-mail" >#{item.email}</p:column>                      
 
                                 <p:column>
-                                    <p:commandButton value="Remover" action="#{funcionarioController.entidade.removeEmail(item)}"
+                                    <p:commandButton value="Remover" action="#{centroDistribuicaoController.entidade.removeEmail(item)}"
                                                      update="listagemEmails">                                                                     
                                     </p:commandButton>                                 
                                 </p:column>
@@ -162,23 +134,24 @@
                             <p:panelGrid columns="2">
 
                                 <p:outputLabel value="DDD:" />
-                                <p:inputText value="#{funcionarioController.telefone.ddd}"  /> 
+                                <p:inputText value="#{centroDistribuicaoController.telefone.ddd}"  /> 
 
                                 <p:outputLabel value="Telefone:" />
-                                <p:inputText value="#{funcionarioController.telefone.numero}"  /> 
+                                <p:inputText value="#{centroDistribuicaoController.telefone.numero}"  /> 
                             </p:panelGrid>
                             <br/>
                             <p:commandButton  id="btnAdicionarTelefone" value="Adicionar" 
-                                              action="#{funcionarioController.addTelefone()}"  update="listagemTelefones"/>
+                                              action="#{centroDistribuicaoController.addTelefone()}"  update="listagemTelefones"/>
+                            <br/>
 
                             <!-- Lista de Telefones.....................................................................................-->
-                            <p:dataTable id="listagemTelefones" value="#{funcionarioController.entidade.telefones}" var="item" lazy="true">                                
+                            <p:dataTable id="listagemTelefones" value="#{centroDistribuicaoController.entidade.telefones}" var="item" lazy="true">                                
                                 <p:column sortBy="nome" headerText="DDD" >#{item.ddd}</p:column>                      
                                 <p:column sortBy="nome" headerText="Telefone" >#{item.numero}</p:column>
 
                                 <p:column>
                                     <p:commandButton value="Remover" 
-                                                     action="#{funcionarioController.entidade.removeTelefone(item)}" 
+                                                     action="#{centroDistribuicaoController.entidade.removeTelefone(item)}" 
                                                      update="listagemTelefones" >
                                     </p:commandButton>                                 
                                 </p:column>
@@ -190,21 +163,20 @@
                     <!-- Botão Salvar e Botão Apagar..........................................................................-->
                     <f:facet name="footer">
                         <p:commandButton  id="btnSalvar" value="Salvar"  onclick="msgSalvar.show();"/>
-                        <p:commandButton  id="btnApagar" value="Apagar"  onclick="msgApagar.show();"/>
-                        <p:commandButton  ajax="false" id="btnVoltar" value="Voltar"  action="index.xhtml"/>            
+                        <p:commandButton  id="btnApagar" value="Apagar"  onclick="msgApagar.show();"/>                        
                     </f:facet>
 
                     <!-- Caixa de confirmação para o botão Salvar............................................................. -->
                     <p:confirmDialog message="Deseja realmente salvar as alterações?" header="Confirmação" severity="alert"
                                      widgetVar="msgSalvar" >
-                        <p:commandButton ajax="false" value="Sim" action="#{funcionarioController.salvar()}"/>
+                        <p:commandButton ajax="false" value="Sim" action="#{centroDistribuicaoController.salvar()}"/>
                         <p:commandButton value="Não" onclick="msgSalvar.hide();" />
                     </p:confirmDialog>
 
                     <!-- Caixa de confirmação para o botão Apagar............................................................. -->
                     <p:confirmDialog message="Deseja realmente apagar o registro?" header="Confirmação" severity="alert"
                                      widgetVar="msgApagar" >
-                        <p:commandButton ajax="false" value="Sim" action="#{funcionarioController.apagar()}"/>
+                        <p:commandButton ajax="false" value="Sim" action="#{centroDistribuicaoController.apagar}"/>
                         <p:commandButton value="Não" onclick="msgApagar.hide();" />
                     </p:confirmDialog>
                 </p:panel>
