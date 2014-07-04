@@ -46,16 +46,21 @@
                                 <p:selectOneMenu value="#{funcionarioController.entidade.cargo}" converter="#{cargoConverter}">
                                     <f:selectItems value="#{cargoController.listagem}" />
                                 </p:selectOneMenu>
-                                
+
                                 <p:outputLabel value="Login: "/>
                                 <p:inputText value="#{funcionarioController.entidade.login}" 
                                              required="true" 
                                              requiredMessage="O campo 'Login' é de preenchimento obrigatório!"  /> 
-                                
+
                                 <p:outputLabel value="Senha: "/>
-                                <p:inputText value="#{funcionarioController.entidade.senha}" 
-                                             required="true" 
-                                             requiredMessage="O campo 'Senha' é de preenchimento obrigatório!"  /> 
+                                <p:password id="senha1" value="#{funcionarioController.entidade.senha}" feedback="true" 
+                                            match="senha2"
+                                            validatorMessage="As senhas não são iguais!" 
+                                            promptLabel="Insira uma senha" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"/> 
+
+                                <p:outputLabel value="Confirmar Senha: "/>
+                                <p:password id="senha2" value="#{funcionarioController.entidade.senha}" feedback="true"
+                                            promptLabel="Insira uma senha" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"/>
 
                             </p:panelGrid>
                         </p:tab>
@@ -109,7 +114,7 @@
                                     <f:selectItem itemLabel="SE" itemValue="SE" />
                                     <f:selectItem itemLabel="TO" itemValue="TO" />
                                 </p:selectOneMenu>
-                                
+
                             </p:panelGrid>  
                             <br/>
                             <p:commandButton  id="btnAdicionarEndereco" value="Adicionar" 
