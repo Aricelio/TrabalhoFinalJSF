@@ -1,14 +1,16 @@
 package br.edu.ifnmg.tads.as.GerenciadorLogistica.Model.DomainModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +19,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Rotas")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Rota implements Serializable {    
     
     //Attributes................................................................
@@ -31,6 +32,9 @@ public class Rota implements Serializable {
     private String nome;
     
     private Double distancia;
+    
+    @OneToMany
+    private List<Cidade> cidades;
     
     //Getters and Setter..........................................................
     public Long getId() {
@@ -57,6 +61,29 @@ public class Rota implements Serializable {
         this.distancia = distancia;
     }
 
+    public List<Cidade> getCidades() {
+        return cidades;
+    }
+
+    public void setCidades(List<Cidade> cidades) {
+        this.cidades = cidades;
+    }
+    
+    //Method addCidade...........................................................
+    public void addCidade(Cidade e) {        
+        if (cidades == null) {
+            cidades = new ArrayList<Cidade>();
+        }
+        if (!cidades.contains(e)) {            
+            cidades.add(e);
+        }
+    }
+
+    public void removeCidade(Cidade e) {
+        if (cidades.contains(e)) {
+            cidades.remove(e);
+        }
+    }
     //Equals e HashCode.........................................................
     @Override    
     public int hashCode() {
