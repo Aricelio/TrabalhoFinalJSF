@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>SysCon Enterprise - Rotas</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="./Global.xhtml" >
+            <ui:define name="content">
+                <p:panel style="font: medium; color: black" >
+                    <p:growl id="mensagens2"/>
+                    <p:tabView id="tbvRotas">
+
+                        <!-- Geral......................................................................................... -->
+                        <p:tab title="Geral" >
+                            <p:panelGrid columns="2">                                                
+                                <p:outputLabel value="Nome:" />
+                                <p:inputText value="#{rotaController.entidade.nome}" 
+                                             required="true" 
+                                             requiredMessage="O campo 'Nome' é de preenchimento obrigatório!"  /> 
+
+                                <p:outputLabel value="Distância:" />
+                                <!-- <p:spinner id="distancia" value="#{rotaController.entidade.distancia}"/>  -->
+                            </p:panelGrid> 
+                        </p:tab>
+
+                        <!-- Cidades...................................................................................... -->
+                        <p:tab title="Cidades" >
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="Nome:" />
+                                <p:inputText value="#{rotaController.cidade.nome}" 
+                                             required="true" 
+                                             requiredMessage="O campo 'Nome' é de preenchimento obrigatório!"  /> 
+
+                                <p:outputLabel value="Estado:" />
+                                <p:selectOneMenu id="uf" value="#{rotaController.cidade.estado}">
+                                    <f:selectItem itemLabel="AC" itemValue="AC" />
+                                    <f:selectItem itemLabel="AL" itemValue="AL" />
+                                    <f:selectItem itemLabel="AP" itemValue="AP" />
+                                    <f:selectItem itemLabel="AM" itemValue="AM" />                                    
+                                    <f:selectItem itemLabel="BA" itemValue="BA" />
+                                    <f:selectItem itemLabel="CE" itemValue="CE" />
+                                    <f:selectItem itemLabel="DF" itemValue="DF" />
+                                    <f:selectItem itemLabel="ES" itemValue="ES" />                                     	
+                                    <f:selectItem itemLabel="GO" itemValue="GO" />
+                                    <f:selectItem itemLabel="MA" itemValue="MA" />
+                                    <f:selectItem itemLabel="MT" itemValue="MT" />
+                                    <f:selectItem itemLabel="MS" itemValue="MS" />                                    
+                                    <f:selectItem itemLabel="MG" itemValue="MG" />
+                                    <f:selectItem itemLabel="PA" itemValue="PA" />
+                                    <f:selectItem itemLabel="PB" itemValue="PB" />
+                                    <f:selectItem itemLabel="PR" itemValue="PR" />                                    
+                                    <f:selectItem itemLabel="PE" itemValue="PE" />
+                                    <f:selectItem itemLabel="PI" itemValue="PI" />
+                                    <f:selectItem itemLabel="RJ" itemValue="RJ" />
+                                    <f:selectItem itemLabel="RN" itemValue="RN" />                                    
+                                    <f:selectItem itemLabel="RS" itemValue="RS" />
+                                    <f:selectItem itemLabel="RO" itemValue="RO" />
+                                    <f:selectItem itemLabel="RR" itemValue="RR" />
+                                    <f:selectItem itemLabel="SC" itemValue="SC" />
+                                    <f:selectItem itemLabel="SP" itemValue="SP" />
+                                    <f:selectItem itemLabel="SE" itemValue="SE" />
+                                    <f:selectItem itemLabel="TO" itemValue="TO" />
+                                </p:selectOneMenu>
+                            </p:panelGrid>
+                            
+                            <br/>
+                            <p:commandButton  id="btnAdicionarCidade" value="Adicionar" 
+                                              action="#{rotaController.addCidade()}"
+                                              update="listagemCidades" /> 
+                            
+                            <!-- Lista de Cidades..............................................................................-->
+                            <p:dataTable id="listagemCidades" value="#{rotaController.entidade.cidades}" 
+                                         var="item" lazy="true">                                 
+                                <p:column sortBy="cidade" headerText="Cidade" >#{item.nome}</p:column>                      
+                                <p:column sortBy="estado" headerText="Estado" >#{item.estado}</p:column>
+                                
+                                <p:column>
+                                    <p:commandButton 
+                                        value="Remover" action="#{rotaController.entidade.removeCidade(item)}"
+                                        update="listagemCidades"> 
+                                    </p:commandButton>                                 
+                                </p:column>
+                            </p:dataTable>
+                        </p:tab>
+                    </p:tabView>
+
+
+
+                    <f:facet name="footer">
+                        <p:commandButton  id="btnSalvar" value="Salvar"  onclick="msgSalvar.show();"/>
+                        <p:commandButton  id="btnApagar" value="Apagar"  onclick="msgApagar.show();"/>
+                        <p:commandButton  ajax="false" id="btnVoltar" value="Voltar"  action="index.xhtml"/>            
+                    </f:facet>
+
+                    <!-- Caixa de Confirmação para o botão 'Salvar'............................................................ -->
+                    <p:confirmDialog message="Deseja realmente salvar as alterações?" header="Confirmação" severity="alert"
+                                     widgetVar="msgSalvar" >
+                        <p:commandButton ajax="false" value="Sim" action="#{rotaController.salvar()}" />
+                        <p:commandButton value="Não" onclick="msgSalvar.hide();" />
+                    </p:confirmDialog>
+
+
+                    <!-- Caixa de Confirmação para o botão 'Apagar'............................................................ -->
+                    <p:confirmDialog message="Deseja realmente apagar o registro?" header="Confirmação" severity="alert"
+                                     widgetVar="msgApagar" >
+                        <p:commandButton ajax="false" value="Sim" action="#{rotaController.apagar()}"/>
+                        <p:commandButton value="Não" onclick="msgApagar.hide();" />
+                    </p:confirmDialog>
+
+                </p:panel>
+            </ui:define>
+        </ui:composition> 
+    </h:body>
+</html>
+
